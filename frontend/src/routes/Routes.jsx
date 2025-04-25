@@ -12,3 +12,5 @@ const Routes = () => {
 }
 
 export default Routes
+
+// 27 min completed video
