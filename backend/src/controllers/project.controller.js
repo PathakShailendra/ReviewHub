@@ -1,4 +1,4 @@
-import { createProject } from "../services/project.service";
+import { createProject } from "../services/project.service.js";
 
 export async function createProjectController(req, res) {
     try {
