@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
 import './createproject.css'
 import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
 
 const CreateProject = () => {
   const [projectName, setProjectName] = useState(null)
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:3000/projects/create')
+    axios.post('http://localhost:3000/projects/create', {
+      projectName: projectName
+    }).then(() => {
+      navigate('/')
+    })
   }
 
 
