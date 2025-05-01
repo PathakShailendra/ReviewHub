@@ -18,3 +18,16 @@
 .home-section button:hover {
     background-color: #004b9e;
 }
+
+.home-section .projects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.home-section .project {
+    padding: 0.5rem 1rem;
+    border: 1px solid #202020;
+    border-radius: 0.5rem;
+}
