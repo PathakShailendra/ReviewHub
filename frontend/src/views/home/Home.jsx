@@ -27,9 +27,9 @@ const Home = () => {
           </div>
         ) : (
           <div className="projects">
-            {projects.map((project) => {
+            {projects.map((project, index) => {
               return (
-                <div className="project">
+                <div key={index} className="project">
                   <h2>{project.name}</h2>
                 </div>
               );
