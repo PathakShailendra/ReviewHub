@@ -1,25 +1,44 @@
-import React from 'react'
-import './home.css'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import "./home.css";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Home = () => {
-
   const navigate = useNavigate();
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/projects/get-all')
+            .then(response => {
+                setProjects(response.data.data)
+            })
+  }, [])
 
   return (
-    <main className='home'>
-      <section className='home-section'>
-        <button onClick={() => navigate('/create-project')}>Create Project</button>
+    <main className="home">
+      <section className="home-section">
+        <button onClick={() => navigate("/create-project")}>
+          Create Project
+        </button>
 
-        <div className='projects'>
-          <div className='project'>
-            <h2>Project 1</h2>
-            <p>Description of project 1</p>
+        {projects.length === 0 ? (
+          <div>
+            <p>No Projects Created</p>
           </div>
-        </div>
+        ) : (
+          <div className="projects">
+            {projects.map((project) => {
+              return (
+                <div className="project">
+                  <h2>{project.name}</h2>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </section>
     </main>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
