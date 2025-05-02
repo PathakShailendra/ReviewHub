@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { io } from "socket.io-client"
+import { io as SocketIo } from "socket.io-client"
 import "./project.css";
 
 const Project = () => {
@@ -18,12 +18,15 @@ const Project = () => {
     setMessages((prev) => {
         return [ ...prev, input ]
     })
+    socket.emit("chat-message", input)
     setInput("")
 }
 
   useEffect(() => {
-    io("http://localhost:3000")
-  })
+    const io = SocketIo("http://localhost:3000")
+
+    setSocket(io)
+  }, [])
 
   return (
     <main className="project-main">
