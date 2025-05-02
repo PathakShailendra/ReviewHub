@@ -14,6 +14,13 @@ const Project = () => {
     "*No review yet. Click 'get-review' to generate a code review.*"
   );
 
+  function handleUserMessage() {
+    setMessages((prev) => {
+        return [ ...prev, input ]
+    })
+    setInput("")
+}
+
   useEffect(() => {
     io("http://localhost:3000")
   })
@@ -42,9 +49,9 @@ const Project = () => {
               value={input}
             />
             <button
-            //   onClick={() => {
-            //     handleUserMessage();
-            //   }}
+              onClick={() => {
+                handleUserMessage();
+              }}
             >
               <i className="ri-send-plane-2-fill"></i>
             </button>

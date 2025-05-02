@@ -7,12 +7,15 @@ const Home = () => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
 
+  function navigateToProject(projectId) {
+    navigate(`/project/${projectId}`);
+  }
+
   useEffect(() => {
-    axios.get('http://localhost:3000/projects/get-all')
-            .then(response => {
-                setProjects(response.data.data)
-            })
-  }, [])
+    axios.get("http://localhost:3000/projects/get-all").then((response) => {
+      setProjects(response.data.data);
+    });
+  }, []);
 
   return (
     <main className="home">
@@ -29,7 +32,13 @@ const Home = () => {
           <div className="projects">
             {projects.map((project, index) => {
               return (
-                <div key={index} className="project">
+                <div
+                  onClick={() => {
+                    navigateToProject(project._id);
+                  }}
+                  key={index}
+                  className="project"
+                >
                   <h2>{project.name}</h2>
                 </div>
               );
