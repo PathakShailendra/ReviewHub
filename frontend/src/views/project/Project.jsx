@@ -4,7 +4,7 @@ import { io as SocketIo } from "socket.io-client"
 import "./project.css";
 
 const Project = () => {
-  const params = useParams();
+  const prams = useParams();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [socket, setSocket] = useState(null);
@@ -13,6 +13,7 @@ const Project = () => {
   const [review, setReview] = useState(
     "*No review yet. Click 'get-review' to generate a code review.*"
   );
+  // console.log(prams)
 
   function handleUserMessage() {
     setMessages((prev) => {
@@ -23,7 +24,11 @@ const Project = () => {
 }
 
   useEffect(() => {
-    const io = SocketIo("http://localhost:3000")
+    const io = SocketIo("http://localhost:3000", {
+      query: {
+          project: prams.id
+      }
+  })
 
     io.on('chat-message', (message) => {
       setMessages((prev) => {

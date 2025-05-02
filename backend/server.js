@@ -12,14 +12,16 @@ const io = new SocketServer(server, {
 
 io.on("connection", (socket) => {
   console.log("New client connected");
-
+  const project = socket.handshake.query.project
+  socket.join(project)
+  
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
 
   socket.on('chat-message', message => {
     console.log(message)
-    socket.broadcast.emit("chat-message", message)
+    socket.broadcast.to(project).emit("chat-message", message)
   } )
 });
 
