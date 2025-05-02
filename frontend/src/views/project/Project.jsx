@@ -25,6 +25,12 @@ const Project = () => {
   useEffect(() => {
     const io = SocketIo("http://localhost:3000")
 
+    io.on('chat-message', (message) => {
+      setMessages((prev) => {
+        return [...prev, message]
+      })
+    })
+
     setSocket(io)
   }, [])
 
