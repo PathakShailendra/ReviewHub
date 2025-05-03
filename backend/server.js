@@ -26,12 +26,22 @@ io.on("connection", (socket) => {
     socket.emit("chat-history", messages);
   });
 
+  socket.on("get-project-code", async () => {
+    const projectData = await projectModel.findById(project).select("code");
+    socket.emit("project-code", projectData.code);
+  });
+
   socket.on("chat-message", async (message) => {
     socket.broadcast.to(project).emit("chat-message", message);
     await messageModel.create({
       project: project,
       text: message,
     });
+  });
+
+  socket.on("code-change", async (code) => {
+    socket.broadcast.to(project).emit("code-change", code);
+    await projectModel.findOneAndUpdate({ _id: project }, { code: code });
   });
 });
 
@@ -40,4 +50,3 @@ connectDB();
 server.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
-

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { io as SocketIo } from "socket.io-client";
+import Editor from "@monaco-editor/react";
+import ReactMarkdown from "react-markdown";
 import "./project.css";
 
 const Project = () => {
@@ -15,12 +17,21 @@ const Project = () => {
   );
   // console.log(prams)
 
+  function handleEditorChange(value) {
+    setCode(value);
+    socket.emit("code-change", value);
+  }
+
   function handleUserMessage() {
     setMessages((prev) => {
       return [...prev, input];
     });
     socket.emit("chat-message", input);
     setInput("");
+  }
+
+  function changeLanguage(newLanguage) {
+    setLanguage(newLanguage);
   }
 
   useEffect(() => {
@@ -41,6 +52,15 @@ const Project = () => {
         return [...prev, message];
       });
     });
+
+    io.on("code-change", (code) => {
+      setCode(code);
+    });
+
+    io.on("project-code", (code) => {
+      setCode(code);
+    });
+    io.emit("get-project-code")
 
     setSocket(io);
   }, []);
@@ -78,7 +98,39 @@ const Project = () => {
           </div>
         </div>
 
-        <div className="code"></div>
+        <div className="code">
+          <div className="language-selector">
+            <select
+              value={language}
+              onChange={(e) => changeLanguage(e.target.value)}
+            >
+              <option value="javascript">JavaScript</option>
+              <option value="typescript">TypeScript</option>
+              <option value="python">Python</option>
+              <option value="java">Java</option>
+              <option value="csharp">C#</option>
+              <option value="html">HTML</option>
+              <option value="css">CSS</option>
+            </select>
+          </div>
+          <Editor
+            height="90%"
+            width="100%"
+            language={language}
+            value={code}
+            onChange={handleEditorChange}
+            theme="vs-dark"
+            options={{
+              minimap: { enabled: true },
+              fontSize: 14,
+              wordWrap: "on",
+              automaticLayout: true,
+              formatOnType: true,
+              formatOnPaste: true,
+              cursorBlinking: "smooth",
+            }}
+          />
+        </div>
 
         <div className="review"></div>
       </section>
