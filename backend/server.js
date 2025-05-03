@@ -2,6 +2,8 @@ import app from "./src/app.js";
 import connectDB from "./src/config/db.js";
 import { Server as SocketServer } from "socket.io";
 import http from "http";
+import messageModel from "./src/models/message.model.js";
+import projectModel from "./src/models/project.model.js";
 
 const server = http.createServer(app);
 const io = new SocketServer(server, {
@@ -12,17 +14,25 @@ const io = new SocketServer(server, {
 
 io.on("connection", (socket) => {
   console.log("New client connected");
-  const project = socket.handshake.query.project
-  socket.join(project)
-  
+  const project = socket.handshake.query.project;
+  socket.join(project);
+
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
 
-  socket.on('chat-message', message => {
-    console.log(message)
-    socket.broadcast.to(project).emit("chat-message", message)
-  } )
+  socket.on("chat-history", async () => {
+    const messages = await messageModel.find({ project: project });
+    socket.emit("chat-history", messages);
+  });
+
+  socket.on("chat-message", async (message) => {
+    socket.broadcast.to(project).emit("chat-message", message);
+    await messageModel.create({
+      project: project,
+      text: message,
+    });
+  });
 });
 
 // Connect to MongoDB
@@ -30,3 +40,4 @@ connectDB();
 server.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
+

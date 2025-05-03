@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { io as SocketIo } from "socket.io-client"
+import { io as SocketIo } from "socket.io-client";
 import "./project.css";
 
 const Project = () => {
@@ -17,27 +17,33 @@ const Project = () => {
 
   function handleUserMessage() {
     setMessages((prev) => {
-        return [ ...prev, input ]
-    })
-    socket.emit("chat-message", input)
-    setInput("")
-}
+      return [...prev, input];
+    });
+    socket.emit("chat-message", input);
+    setInput("");
+  }
 
   useEffect(() => {
     const io = SocketIo("http://localhost:3000", {
       query: {
-          project: prams.id
-      }
-  })
+        project: prams.id,
+      },
+    });
 
-    io.on('chat-message', (message) => {
+    io.emit("chat-history");
+
+    io.on("chat-history", (messages) => {
+      setMessages(messages.map((message) => message.text));
+    });
+
+    io.on("chat-message", (message) => {
       setMessages((prev) => {
-        return [...prev, message]
-      })
-    })
+        return [...prev, message];
+      });
+    });
 
-    setSocket(io)
-  }, [])
+    setSocket(io);
+  }, []);
 
   return (
     <main className="project-main">
@@ -50,7 +56,7 @@ const Project = () => {
                   <span>{message}</span>
                 </div>
               );
-            })}  
+            })}
           </div>
 
           <div className="input-area">
