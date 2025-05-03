@@ -30,6 +30,10 @@ const Project = () => {
     setInput("");
   }
 
+  function getReview() {
+    socket.emit("get-review", code)
+}
+
   function changeLanguage(newLanguage) {
     setLanguage(newLanguage);
   }
@@ -60,7 +64,13 @@ const Project = () => {
     io.on("project-code", (code) => {
       setCode(code);
     });
-    io.emit("get-project-code")
+
+    io.on("code-review", (review) => {
+      console.log(review);
+      setReview(review);
+    });
+
+    io.emit("get-project-code");
 
     setSocket(io);
   }, []);
@@ -132,7 +142,19 @@ const Project = () => {
           />
         </div>
 
-        <div className="review"></div>
+        <div className="review">
+          <div className="review-content">
+            <ReactMarkdown>{review}</ReactMarkdown>
+          </div>
+          <button
+            onClick={() => {
+              getReview();
+            }}
+            className="get-review"
+          >
+            get-review
+          </button>
+        </div>
       </section>
     </main>
   );

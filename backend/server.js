@@ -4,6 +4,7 @@ import { Server as SocketServer } from "socket.io";
 import http from "http";
 import messageModel from "./src/models/message.model.js";
 import projectModel from "./src/models/project.model.js";
+import { getReview } from "./src/services/ai.service.js";
 
 const server = http.createServer(app);
 const io = new SocketServer(server, {
@@ -43,6 +44,13 @@ io.on("connection", (socket) => {
     socket.broadcast.to(project).emit("code-change", code);
     await projectModel.findOneAndUpdate({ _id: project }, { code: code });
   });
+
+  socket.on("get-review", async (code) => {
+    const review = await getReview(code);
+    socket.emit("code-review", review);
+  });
+
+  
 });
 
 // Connect to MongoDB
