@@ -76,7 +76,7 @@ Great foundation! With these tweaks, it’s much safer and cleaner. Keep coding 
   });
 
   const review = response.text;
-  console.log(response.text)
+  // console.log(response.text)
 
   return review;
 }
