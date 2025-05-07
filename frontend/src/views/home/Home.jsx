@@ -12,7 +12,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    axios.get("http://localhost:3000/projects/get-all").then((response) => {
+    axios.get("https://reviewhub-backend-ogcj.onrender.com/projects/get-all").then((response) => {
       setProjects(response.data.data);
     });
   }, []);
