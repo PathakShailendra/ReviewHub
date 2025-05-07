@@ -66,7 +66,7 @@ const Project = () => {
     });
 
     io.on("code-review", (review) => {
-      console.log(review);
+      // console.log(review);
       setReview(review);
     });
 
