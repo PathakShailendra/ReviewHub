@@ -7,8 +7,8 @@ const Home = () => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
 
-  function navigateToProject(projectId) {
-    navigate(`/project/${projectId}`);
+  function navigateToProject(projectId, projectName) {
+    navigate(`/project/${projectId}`, { state: { name: projectName } });
   }
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const Home = () => {
                 return (
                   <div
                     onClick={() => {
-                      navigateToProject(project._id);
+                      navigateToProject(project._id, project.name);
                     }}
                     key={index}
                     className="project"

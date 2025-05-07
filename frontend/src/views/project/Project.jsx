@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { io as SocketIo } from "socket.io-client";
 import Editor from "@monaco-editor/react";
 import ReactMarkdown from "react-markdown";
@@ -18,6 +18,9 @@ const Project = () => {
   const [loading, setLoading] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
   const [codeCopySuccess, setCodeCopySuccess] = useState(false);
+  const location = useLocation();
+  const { name } = location.state || {};
+  // console.log(name)
 
   function handleEditorChange(value) {
     setCode(value);
@@ -188,6 +191,7 @@ const Project = () => {
         <div className="code">
           <div className="section-header">
             <h2>Code</h2>
+            <h1>Project name : {name}</h1>
           </div>
           <div className="code-editor-header">
             <div className="language-selector">
