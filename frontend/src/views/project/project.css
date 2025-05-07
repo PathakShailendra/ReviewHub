@@ -5,82 +5,150 @@
     padding: 1rem;
 }
 
-
 .project-section {
     display: flex;
     gap: 1rem;
     padding: 0;
 }
 
-.project-section>* {
+.project-section > * {
     height: 100%;
     flex: 1;
     border-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Section Header (Navbar) */
+.section-header {
+    background-color: #f8f8f8;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Chat Section */
 .project-section .chat {
-    background-color: #ededed;
+    background-color: #f5f5f5;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-section .chat .messages {
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
-    width: 80%;
+    gap: 0.5rem;
+    width: 95%;
     transform: translateX(-50%);
     left: 50%;
     position: absolute;
-    top: 0;
+    top: 50px; /* Adjusted for header */
     padding-bottom: 5rem;
     overflow-y: auto;
-    height: 100%;
+    height: calc(100% - 50px); /* Adjusted for header */
 }
 
 .project-section .chat .messages::-webkit-scrollbar {
-    display: none;
+    width: 6px;
+}
+
+.project-section .chat .messages::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    border-radius: 10px;
+}
+
+.project-section .chat .messages::-webkit-scrollbar-track {
+    background-color: transparent;
 }
 
 .project-section .chat .messages .message {
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-    max-width: 80%;
+    padding: 0.7rem 1rem;
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+    max-width: 75%;
     width: fit-content;
-    background-color: #dedada;
+    word-wrap: break-word;
+    position: relative;
+    font-size: 0.95rem;
 }
+
+.project-section .chat .messages .user-message {
+    background-color: #dcf8c6;
+    align-self: flex-end;
+    border-bottom-right-radius: 0.2rem;
+    margin-left: auto;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.project-section .chat .messages .other-message {
+    background-color: #ffffff;
+    align-self: flex-start;
+    border-bottom-left-radius: 0.2rem;
+    margin-right: auto;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+
 
 .project-section .chat .input-area {
     position: absolute;
-    width: 80%;
-    background-color: #d4d4d4;
+    width: 90%;
+    background-color: #ffffff;
     transform: translateX(-50%);
     left: 50%;
-    border-radius: 0.7rem;
+    border-radius: 1.5rem;
     bottom: 1rem;
-    padding: 1rem;
+    padding: 0.2rem 0.5rem;
     display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .project-section .chat .input-area input {
-    padding: 0.5rem 0.7rem;
+    padding: 0.8rem 1rem;
     width: 100%;
     background-color: transparent;
     border: none;
     outline: none;
+    font-size: 0.95rem;
 }
 
-.project-section .chat .input-area button {
-    padding: 0.5rem 1rem;
+.project-section .chat .input-area .send-button {
+    padding: 0.8rem;
     border: none;
-    border-radius: 0.5rem;
-    background-color: transparent;
-    color: rgb(52, 51, 51);
+    border-radius: 50%;
+    background-color: #25d366;
+    color: white;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
 }
 
+.project-section .chat .input-area .send-button:hover {
+    background-color: #128c7e;
+}
+
+.project-section .chat .input-area .send-button i {
+    font-size: 1.2rem;
+}
+
+/* Code Section */
 .project-section .code {
     background-color: #1e1e1e;
     display: flex;
@@ -88,17 +156,54 @@
     position: relative;
 }
 
-.project-section .code .language-selector {
+/* New Code Editor Header */
+.project-section .code .code-editor-header {
     padding: 10px;
     background-color: #252526;
     z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project-section .code .code-editor-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.project-section .code .code-editor-button {
+    background-color: #3c3c3c;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.project-section .code .code-editor-button:hover {
+    background-color: #4c4c4c;
+}
+
+.project-section .code .code-editor-button.copy-success {
+    background-color: #217c35;
+}
+
+.project-section .code .code-editor-button.clear-button:hover {
+    background-color: #6e3c3c;
+}
+
+.project-section .code .language-selector {
+    padding: 0;
 }
 
 .project-section .code .language-selector select {
     background-color: #3c3c3c;
     color: #ffffff;
     border: none;
-    padding: 5px 10px;
+    padding: 8px 12px;
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
@@ -114,27 +219,245 @@
     color: #ffffff;
 }
 
+/* Review Section - Updated with lighter center gradient */
+.project-section .review {
+    position: relative;
+    overflow-y: auto;
+    padding: 0;
+    background: radial-gradient(circle at center, #a6caff 0%, #b9d5ff 20%, #d0e2ff 40%, #e1edff 60%, #f0f7ff 80%, #ffffff 100%);
+    color: #000;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-section .review .section-header {
+    background: #f8f8f8;
+}
+
+.project-section .review .review-content {
+    padding: 1.5rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    line-height: 1.6;
+    font-size: 1rem;
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Review Content Styling */
+.project-section .review .review-content h1,
+.project-section .review .review-content h2,
+.project-section .review .review-content h3 {
+    color: #111;
+    margin-top: 1.2rem;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.project-section .review .review-content p {
+    margin-bottom: 1rem;
+}
+
+.project-section .review .review-content code {
+    background-color: rgba(0, 0, 0, 0.06);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.project-section .review .review-content pre {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #f8f8f8;
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+/* Review Buttons Container */
+.project-section .review .review-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Updated Review Button */
+.project-section .review .get-review {
+    padding: 0.65rem 1.3rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: linear-gradient(135deg, #000000, #222222);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-section .review .get-review:hover {
+    background: linear-gradient(135deg, #111111, #333333);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(79, 172, 254, 0.4);
+    transform: translateY(-2px);
+}
+
+.project-section .review .get-review:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(79, 172, 254, 0.6);
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+}
+
+.project-section .review .get-review:disabled {
+    background: linear-gradient(135deg, #444444, #666666);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Copy Code Button */
+.project-section .review .copy-code {
+    padding: 0.65rem 1.3rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: linear-gradient(135deg, #1a3a66, #2d5ba0);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-section .review .copy-code:hover {
+    background: linear-gradient(135deg, #234d85, #3672c9);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(79, 172, 254, 0.4);
+    transform: translateY(-2px);
+}
+
+.project-section .review .copy-code:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(79, 172, 254, 0.6);
+    background: linear-gradient(135deg, #1a3a66, #234d85);
+}
+
+.project-section .review .copy-code.copy-success {
+    background: linear-gradient(135deg, #217c35, #2ea847);
+}
+
+/* Review Loading Spinner */
+.project-section .review .review-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.project-section .review .loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #2a6bb8;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Code Section - Update for header */
+.project-section .code {
+    padding: 0;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+    .project-main {
+        padding: 0.5rem;
+        height: auto;
+    }
+    
+    .project-section {
+        flex-direction: column;
+        height: auto;
+        gap: 1rem;
+    }
+    
+    .project-section > * {
+        height: 400px;  /* Fixed height for mobile */
+        min-height: 300px;
+        width: 100%;
+        margin-bottom: 1rem;
+        overflow-y: auto;
+    }
+    
+    .project-section .chat {
+        order: 1;  /* Display chat first */
+    }
+    
+    .project-section .code {
+        order: 2;  /* Display code second */
+        height: 400px;  /* Explicitly set height to match others */
+    }
+    
+    .project-section .code .monaco-editor {
+        height: 85% !important;  /* Force editor height */
+    }
+    
+    .project-section .review {
+        order: 3;  /* Display review last */
+    }
+    
+    .project-section .chat .messages {
+        width: 90%;
+        height: calc(100% - 50px);  /* Adjust for input area */
+    }
+    
+    .project-section .chat .input-area {
+        width: 85%;
+        bottom: 10px;
+    }
+    
+    /* Ensure all three sections scroll properly on mobile */
+    .project-section .code,
+    .project-section .review,
+    .project-section .chat {
+        overflow: auto;
+    }
+    
+    .project-section .review .review-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .project-section .code .code-editor-header {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    
+    .project-section .code .code-editor-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .project-section .code .code-editor-button {
+        flex: 1;
+    }
+}
+
 /* Monaco Editor Adjustments */
 .project-section .code .monaco-editor .margin {
     background-color: #1e1e1e;
-}
-
-.project-section .review {
-    background-color: #faece1;
-    position: relative;
-    overflow-y: auto;
-    padding: 1rem;
-    padding-left: 3rem;
-}
-
-.project-section .review .get-review {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.5rem;
-    background-color: #ffffff;
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
