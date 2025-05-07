@@ -96,7 +96,7 @@ const Project = () => {
   }
 
   useEffect(() => {
-    const io = SocketIo("http://localhost:3000", {
+    const io = SocketIo("https://reviewhub-backend-ogcj.onrender.com", {
       query: {
         project: prams.id,
       },
