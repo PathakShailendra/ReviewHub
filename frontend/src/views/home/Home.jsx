@@ -22,7 +22,7 @@ const Home = () => {
       <section className="home-section">
         <div className="header">
           <h1>Your Projects</h1>
-          <button onClick={() => navigate("/create-project")}>
+          <button className="new-project-btn" onClick={() => navigate("/create-project")}>
             <span>+</span> New Project
           </button>
         </div>
@@ -53,6 +53,7 @@ const Home = () => {
                       </svg>
                     </div>
                     <h2>{project.name}</h2>
+                    <div className="project-view">View Project</div>
                   </div>
                 );
               })}

@@ -1,31 +1,32 @@
 .create-project {
-    width: 100%;
-    min-height: 100vh;
-    background: radial-gradient(circle at center, #BDD9D7 0%, #03363D 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    color: #fff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    padding: 2rem;
-  }
-  
-  /* Central gradient glow effect */
-  .create-project::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 70%;
-    height: 70%;
-    background: radial-gradient(circle, rgba(189, 217, 215, 0.3) 0%, rgba(3, 54, 61, 0) 70%);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    filter: blur(60px);
-    z-index: 0;
-  }
+  width: 100%;
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #cfe6f7 0%, #a8c7e2 50%, #e9f2f9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  color: #333; /* changed to match home text color */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  padding: 2rem;
+}
+
+/* Central bluish glow effect */
+.create-project::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 15%;
+  height: 15%;
+  background: radial-gradient(circle, rgba(86, 160, 215, 0.25) 0%, rgba(203, 227, 250, 0) 80%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  filter: blur(20px);
+  z-index: 0;
+}
+
   
   .create-project-container {
     width: 100%;
