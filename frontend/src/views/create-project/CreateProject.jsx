@@ -9,7 +9,7 @@ const CreateProject = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:3000/projects/create', {
+    axios.post('https://reviewhub-backend-ogcj.onrender.com/projects/create', {
       projectName: projectName
     }).then(() => {
       navigate('/')
